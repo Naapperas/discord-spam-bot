@@ -3,10 +3,10 @@ from discord.ext import commands
 import discord
 from os import listdir
 from os.path import isfile, join
-import time, random, sys
+import time, random
 
 # use this to monkey patch the asyncio event loop
-nest_asyncio.apply()
+#nest_asyncio.apply()
 
 TOKEN = "Nzc1MDkwNjkxNjEyNDc1NDAy.X6hRdQ.5KMbIfYM_uY2C333jEvO6Q7bzWk"
 
@@ -236,7 +236,7 @@ async def stop(ctx, spam_type="movie"):
 
 @bot.event
 async def on_command_error(ctx, error):
-    print("ERROR", error)
+    print("ERROR", error, type(error))
     if isinstance(error, commands.errors.CommandNotFound):
         await ctx.send("That command doesn't currently exist!")
 
