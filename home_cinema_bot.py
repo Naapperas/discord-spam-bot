@@ -8,8 +8,6 @@ import time, random, sys
 # use this to monkey patch the asyncio event loop
 nest_asyncio.apply()
 
-pass_file = open("pass.pass", "r")
-
 TOKEN = "Nzc1MDkwNjkxNjEyNDc1NDAy.X6hRdQ.5KMbIfYM_uY2C333jEvO6Q7bzWk"
 
 # 2
