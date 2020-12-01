@@ -1,12 +1,8 @@
-import nest_asyncio
 from discord.ext import commands
 import discord
 from os import listdir
 from os.path import isfile, join
 import time, random
-
-# use this to monkey patch the asyncio event loop
-#nest_asyncio.apply()
 
 TOKEN = "Nzc1MDkwNjkxNjEyNDc1NDAy.X6hRdQ.5KMbIfYM_uY2C333jEvO6Q7bzWk"
 
@@ -47,6 +43,9 @@ async def yomamasofat(ctx):
 @bot.command(name="poke", help="be a annoying prick, poke a member >:) -NOT WORKING ????????")
 async def poke(ctx, member):
     print("running: poke")
+    
+    if(True):
+    	return
 
     the_message = ctx.message
 
@@ -137,12 +136,14 @@ async def read_movie(ctx, movie_name: str):
 
     if(movie_name == ""):
         await ctx.send("You need to provide a movie to display!!")
+        scripts_running[the_guild] = False
         return
 
     movie = (movie_name + ".txt")
 
     if(movie not in movie_scripts):
         await ctx.send("You need to provide an existing movie to display!!")
+        scripts_running[the_guild] = False
         return
 
     movie_file = open("movie_scripts/" + movie, "r")
@@ -160,6 +161,8 @@ async def read_movie(ctx, movie_name: str):
         for line in scripts[the_guild]:
             await ctx.send(line)
             time.sleep(1)
+            
+    scripts_running[the_guild] = False
 
 
 @bot.command(name="speak_movie", help="NOT WORKING-Joins a voice channel and starts reading the given movie")
