@@ -34,16 +34,19 @@ async def on_ready():
 
 @bot.command(name="fuckyou", help="fuck you")
 async def fuck_you(ctx):
+    print("running: fuckyou")
     await ctx.send("thats why")
 
 
 @bot.command(name="yomamasofat", help="lol")
 async def yomamasofat(ctx):
+    print("running: yomamasofat")
     await ctx.send("lol, no u")
 
 
 @bot.command(name="poke", help="be a annoying prick, poke a member >:) -NOT WORKING ????????")
 async def poke(ctx, member):
+    print("running: poke")
 
     the_message = ctx.message
 
@@ -55,15 +58,9 @@ async def poke(ctx, member):
         await the_message.delete()
 
 
-@bot.command(name="kill")
-async def kill(ctx):
-
-    await ctx.message.delete()
-
-    sys.exit(0)
-
 @bot.command(name="clear", help="clears the last 10 messages", hidden=True)
 async def clear(ctx, the_limit=100):
+    print("running: clear")
     the_message: discord.Message = ctx.message
 
     if(the_message):
@@ -86,7 +83,7 @@ async def clear(ctx, the_limit=100):
 
 @bot.command(name="spam_emote", help="Spams emotes continualsy (or a specified number of times) or one particular emote specified by the user")
 async def spam_emote(ctx, emote_name: str = "no emote", num_times: int = -1):
-
+    print("running: spam_emote")
     the_message: discord.Message = ctx.message
 
     if(the_message):
@@ -127,7 +124,7 @@ async def spam_emote(ctx, emote_name: str = "no emote", num_times: int = -1):
 
 @bot.command(name='read_movie', help="Starts writing the movie script, line by line")
 async def read_movie(ctx, movie_name: str):
-
+    print("running: read_movie")
     the_guild = ctx.guild
 
     if(the_guild):
@@ -167,7 +164,7 @@ async def read_movie(ctx, movie_name: str):
 
 @bot.command(name="speak_movie", help="NOT WORKING-Joins a voice channel and starts reading the given movie")
 async def speak_movie(ctx, movie_name: str):
-
+    print("running: speak_movie")
     if(True):
         await ctx.send("NOT CURRENTLY WORKING")
         return
@@ -216,7 +213,7 @@ async def speak_movie(ctx, movie_name: str):
 
 @bot.command(name="stop", help="Stops the bot from reading the movie script or spamming emotes, defaults to movies")
 async def stop(ctx, spam_type="movie"):
-
+    print("running: stop")
     the_guild = ctx.guild
 
     if(the_guild):
@@ -239,6 +236,7 @@ async def stop(ctx, spam_type="movie"):
 
 @bot.event
 async def on_command_error(ctx, error):
+    print("ERROR", error)
     if isinstance(error, commands.errors.CommandNotFound):
         await ctx.send("That command doesn't currently exist!")
 
