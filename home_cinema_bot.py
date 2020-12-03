@@ -157,7 +157,7 @@ async def read_movie(ctx, movie_name: str):
     script = []
 
     for line in movie_file:
-    	print("Appending line")
+        print("Appending line")
         script.append(line)
 
     print("Finished reading movie file!")
