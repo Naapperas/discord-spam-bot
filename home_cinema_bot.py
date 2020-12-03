@@ -157,6 +157,7 @@ async def read_movie(ctx, movie_name: str):
     script = []
 
     for line in movie_file:
+    	print("Appending line")
         script.append(line)
 
     print("Finished reading movie file!")
@@ -167,10 +168,14 @@ async def read_movie(ctx, movie_name: str):
 
     print("Putting movie in scripts dict, beginning to write lines")
 
-    if(the_guild):
-        for line in scripts[the_guild]:
-            await ctx.send(line)
-            time.sleep(1)
+    if(len(script) > 0):
+        if(the_guild):
+            for line in scripts[the_guild]:
+                if(line != ""):
+                    await ctx.send(line)
+                    time.sleep(1)
+    else:
+    	print("No movie read!!!!")
             
     print("Finnished writing movie!")
             
