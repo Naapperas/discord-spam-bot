@@ -134,6 +134,8 @@ async def read_movie(ctx, movie_name: str):
                 await ctx.send(f"***Already writing movie script {ctx.author.mention}!***")
                 return
 
+    print("Not currently writing movie in guild, beginning to do so!")
+
     if(movie_name == ""):
         await ctx.send("You need to provide a movie to display!!")
         scripts_running[the_guild] = False
@@ -146,6 +148,8 @@ async def read_movie(ctx, movie_name: str):
         scripts_running[the_guild] = False
         return
 
+    print("Valid movie name given")
+
     movie_file = open("movie_scripts/" + movie, "r")
 
     script = []
@@ -153,14 +157,20 @@ async def read_movie(ctx, movie_name: str):
     for line in movie_file:
         script.append(line)
 
+    print("Finished reading movie file!")
+
     if(the_guild):
         if(the_guild not in scripts):
             scripts[the_guild] = script
+
+    print("Putting movie in scripts dict, beginning to write lines")
 
     if(the_guild):
         for line in scripts[the_guild]:
             await ctx.send(line)
             time.sleep(1)
+            
+    print("Finnished writing movie!")
             
     scripts_running[the_guild] = False
 
