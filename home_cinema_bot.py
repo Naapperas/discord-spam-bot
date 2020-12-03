@@ -248,6 +248,7 @@ async def stop(ctx, spam_type="movie"):
                     scripts[the_guild].clear()
                     await ctx.send("Stoping movie script playback")
                     scripts_running[the_guild] = False
+                    del scripts[the_guild]
         elif(spam_type == "emote"):
             if(the_guild not in spamming_emotes or not spamming_emotes[the_guild]):
                 await ctx.send("What are you trying to stop, you dumbf*uck?")
