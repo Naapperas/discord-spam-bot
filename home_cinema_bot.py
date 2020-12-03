@@ -13,6 +13,8 @@ scripts_path = "movie_scripts"
 
 movie_scripts = [f for f in listdir(scripts_path) if isfile(join(scripts_path, f))]
 
+print(movie_scripts)
+
 scripts = {}
 
 scripts_running = {}
