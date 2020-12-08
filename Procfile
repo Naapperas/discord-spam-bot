@@ -1,1 +1,1 @@
-worker: python home_cinema_bot.py
+worker: python discord_spam_bot.py
