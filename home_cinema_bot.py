@@ -45,10 +45,7 @@ async def yomamasofat(ctx):
 @bot.command(name="poke", help="be a annoying prick, poke a member >:) -NOT WORKING ????????")
 async def poke(ctx, member):
     print("running: poke")
-    
-    if(True):
-    	return
-
+   
     the_message = ctx.message
 
     print(member.mention, the_message)
