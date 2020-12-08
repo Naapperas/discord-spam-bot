@@ -37,7 +37,7 @@ async def fuck_you(ctx):
 @bot.command(name="yomamasofat", help="lol")
 async def yomamasofat(ctx, member: discord.Member=None):
     print("running: yomamasofat")
-    await ctx.send("lol, no u" + (" " + member.mention) if member else "")
+    await ctx.send("lol, no u" + (" " + ctx.message.author.mention) if member else "")
 
 
 @bot.command(name="poke", help="be a annoying prick, poke a member >:)")
