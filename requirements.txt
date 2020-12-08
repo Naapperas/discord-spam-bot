@@ -1,4 +1,5 @@
 git+https://github.com/Rapptz/discord.py
 PyNaCl==1.3.0
 nest-asyncio==1.4.2
-pretty_help
+discord-pretty-help==1.1.2
+
