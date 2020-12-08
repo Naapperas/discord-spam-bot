@@ -43,11 +43,12 @@ async def yomamasofat(ctx):
 
 
 @bot.command(name="poke", help="be a annoying prick, poke a member >:) -NOT WORKING ????????")
-async def poke(ctx, member):
+async def poke(ctx, member: discord.Member):
     print("running: poke")
    
     the_message = ctx.message
 
+    print(member)
     print(member.mention, the_message)
 
     await ctx.send(member.mention)
