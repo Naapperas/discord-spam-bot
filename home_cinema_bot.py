@@ -4,12 +4,7 @@ from os import listdir
 from os.path import isfile, join
 import time, random
 
-pass_file = open("pass.pass", "r")
-
-TOKEN = ""
-
-for line in pass_file:
-    TOKEN = line
+TOKEN = "Nzc1MDkwNjkxNjEyNDc1NDAy.X6hRdQ.5KMbIfYM_uY2C333jEvO6Q7bzWk"
 
 # 2
 bot = commands.Bot(command_prefix='$')
@@ -40,9 +35,9 @@ async def fuck_you(ctx):
 
 
 @bot.command(name="yomamasofat", help="lol")
-async def yomamasofat(ctx):
+async def yomamasofat(ctx, member: discord.Member=None):
     print("running: yomamasofat")
-    await ctx.send("lol, no u")
+    await ctx.send("lol, no u" + (" " + member.mention) if member else "")
 
 
 @bot.command(name="poke", help="be a annoying prick, poke a member >:)")
