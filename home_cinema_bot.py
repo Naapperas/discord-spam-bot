@@ -4,7 +4,12 @@ from os import listdir
 from os.path import isfile, join
 import time, random
 
-TOKEN = "Nzc1MDkwNjkxNjEyNDc1NDAy.X6hRdQ.5KMbIfYM_uY2C333jEvO6Q7bzWk"
+pass_file = open("pass.pass", "r")
+
+TOKEN = ""
+
+for line in pass_file:
+    TOKEN = line
 
 # 2
 bot = commands.Bot(command_prefix='$')
@@ -12,8 +17,6 @@ bot = commands.Bot(command_prefix='$')
 scripts_path = "movie_scripts"
 
 movie_scripts = [f for f in listdir(scripts_path) if isfile(join(scripts_path, f))]
-
-print(movie_scripts)
 
 scripts = {}
 
