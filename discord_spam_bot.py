@@ -3,11 +3,13 @@ import discord
 from os import listdir
 from os.path import isfile, join
 import time, random
+from pretty_help import PrettyHelp
+
 
 TOKEN = "Nzc1MDkwNjkxNjEyNDc1NDAy.X6hRdQ.5KMbIfYM_uY2C333jEvO6Q7bzWk"
 
 # 2
-bot = commands.Bot(command_prefix='$')
+bot = commands.Bot(command_prefix='$', help_command=PrettyHelp())
 
 scripts_path = "movie_scripts"
 
