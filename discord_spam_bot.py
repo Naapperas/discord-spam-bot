@@ -6,7 +6,14 @@ import time, random
 from pretty_help import PrettyHelp
 
 
-TOKEN = "Nzc1MDkwNjkxNjEyNDc1NDAy.X6hRdQ.5KMbIfYM_uY2C333jEvO6Q7bzWk"
+TOKEN = ""
+
+pass_file = open("pass.pass", "r")
+
+TOKEN = ""
+
+for line in pass_file:
+    TOKEN = line
 
 # 2
 bot = commands.Bot(command_prefix='$', help_command=PrettyHelp())
@@ -54,7 +61,7 @@ async def poke(ctx, member: discord.Member):
         await the_message.delete()
 
 
-@bot.command(name="clear", help="clears the last 10 messages", hidden=True)
+@bot.command(name="clear", help="clears the last 'n' messages, defaulting to 100", hidden=True)
 async def clear(ctx, the_limit=100):
     print("running: clear")
     the_message: discord.Message = ctx.message
@@ -131,7 +138,7 @@ async def read_movie(ctx, movie_name: str):
                 await ctx.send(f"***Already writing movie script {ctx.author.mention}!***")
                 return
 
-    print("Not currently writing movie in guild, beginning to do so!")
+    print("Not currently writing movie in guild, attempting to do so!")
 
     if(movie_name == ""):
         await ctx.send("You need to provide a movie to display!!")
