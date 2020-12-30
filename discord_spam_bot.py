@@ -24,7 +24,7 @@ spamming_emotes = {}
 emotes = ["kekw", "pepega", "sadge", "peepohappy", "monkaW", "ELIMINAR",
           "pufavo", "pogchamp", "weirdchamp", "homies", "FeelsStrongMan",
           "5head", "bruh", "caragomeu", "ehehe", "mds", "facho", "caos", "zeapogar", 
-          "poggies", "angryNPC", "wat", "stop"]
+          "poggies", "angryNPC", "wat", "stop", "cringe", "maskwojak"]
 
 
 @bot.event
