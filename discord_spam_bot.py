@@ -1,10 +1,12 @@
 from discord.ext import commands
 import discord
+import os
 from os import listdir
 from os.path import isfile, join
 import time, random
 from pretty_help import PrettyHelp
 
+print(os.environ['KEY'])
 
 TOKEN = ""
 
