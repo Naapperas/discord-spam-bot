@@ -6,16 +6,7 @@ from os.path import isfile, join
 import time, random
 from pretty_help import PrettyHelp
 
-print(os.environ['KEY'])
-
-TOKEN = ""
-
-pass_file = open("pass.pass", "r")
-
-TOKEN = ""
-
-for line in pass_file:
-    TOKEN = line
+TOKEN = str(os.environ['TOKEN'])
 
 # 2
 bot = commands.Bot(command_prefix='$', help_command=PrettyHelp())
