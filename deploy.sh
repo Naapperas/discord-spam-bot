@@ -9,6 +9,6 @@ NC='\033[0m'
 
 bash ./heroku_deploy.sh "$ARG"
 
-echo "${RED} $TOKEN ${NC}"
+echo -e "${RED} $TOKEN ${NC}"
 
 bash ./github_deploy.sh "$ARG"
