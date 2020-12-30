@@ -7,8 +7,8 @@ fi
 RED='\033[0;31m'
 NC='\033[0m'
 
-bash ./heroku_deploy.sh "$ARG"
+#bash ./heroku_deploy.sh "$ARG"
 
-echo -e "${RED} $TOKEN ${NC}"
+echo -e "${RED}Your token is: $TOKEN ${NC}"
 
 bash ./github_deploy.sh "$ARG"
