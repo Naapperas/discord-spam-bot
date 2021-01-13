@@ -35,6 +35,17 @@ emotes = ["kekw", "pepega", "sadge", "peepohappy", "monkaW", "ELIMINAR",
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
+
+@commands.has_permissions(administrator=True)
+@bot.command(name="register_emote", hidden=True)
+async def register_emote(ctx, emote_name):
+    await ctx.send("Teste")
+    time.sleep(3)
+    async for message in ctx.channel.history(limit=2):
+        await message.delete()
+    pass
+
+
 @bot.command(name="fuckyou", help="fuck you")
 async def fuck_you(ctx):
     print("running: fuckyou")
@@ -120,7 +131,7 @@ async def spam_emote(ctx, emote_name: str = "no emote", num_times: int = -1):
 
             emoji = discord.utils.get(bot.emojis, name=emote)
             await ctx.send(str(emoji) if emoji is not None else f"No emote with name {emote} found")
-            spamming_emotes[the_guild] = False
+        spamming_emotes[the_guild] = False
 
 
 @bot.command(name='read_movie', help="Starts writing the movie script, line by line")
@@ -244,6 +255,7 @@ async def spam_message(ctx, *args):
 
     spam_amount = -1
     spam_message = " ".join(args)
+
     try:
         spam_amount = int(args[-1])
         spam_message = " ".join(args[:len(args) - 1])
