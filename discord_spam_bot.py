@@ -21,6 +21,8 @@ scripts_running = {}
 
 spamming_emotes = {}
 
+spamming_messages = {}
+
 emotes = ["kekw", "pepega", "sadge", "peepohappy", "monkaW", "ELIMINAR",
           "pufavo", "pogchamp", "weirdchamp", "homies", "FeelsStrongMan",
           "5head", "bruh", "caragomeu", "ehehe", "mds", "facho", "caos", "zeapogar", 
@@ -232,6 +234,34 @@ async def speak_movie(ctx, movie_name: str):
     await vc.disconnect()
 
 
+@bot.command(name="spam_message", help="Spams the given message.")
+async def spam_message(ctx, spam_message: str, spam_amount: int = -1):
+    print("running:spam_message")
+
+    the_guild = ctx.guild
+
+    if(the_guild):
+        if(the_guild not in spamming_messages or not spamming_messages[the_guild]):
+            spamming_messages[the_guild] = True
+        else:
+            if(spamming_messages[the_guild]):
+                await ctx.send(f"***Already writing movie script {ctx.author.mention}!***")
+                return
+
+    if(len(spam_message) <= 0):
+        await ctx.send("You must provide a message to spam")
+
+    if(the_guild):
+        if(spam_amount < 0):
+            while spamming_messages[the_guild]:
+                await ctx.send(spam_message)
+        else:
+            for _ in range(spam_amount):
+                await ctx.send(spam_message)
+        
+    spamming_messages[the_guild] = True
+
+
 @bot.command(name="stop", help="Stops the bot from reading the movie script or spamming emotes, defaults to movies")
 async def stop(ctx, spam_type="movie"):
     print("running: stop")
@@ -254,6 +284,13 @@ async def stop(ctx, spam_type="movie"):
                 if(spamming_emotes[the_guild]):
                     await ctx.send("Stoping emote spam playback")
                     spamming_emotes[the_guild] = False
+        elif(spam_type == "spam"):
+            if(the_guild not in spamming_messages or not spamming_messages[the_guild]):
+                await ctx.send("What are you trying to stop, you dumbf*uck?")
+            else:
+                if(spamming_messages[the_guild]):
+                    await ctx.send("Stoping spam")
+                    spamming_messages[the_guild] = False
 
 
 @bot.event
