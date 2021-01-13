@@ -152,6 +152,8 @@ async def read_movie(ctx, movie_name: str):
 
     print("Valid movie name given")
 
+    await ctx.message.delete()
+
     movie_file = open("movie_scripts/" + movie, "r")
 
     script = []
@@ -220,6 +222,8 @@ async def speak_movie(ctx, movie_name: str):
         await ctx.send("You need to provide an existing movie to speak!!")
         return
 
+    await ctx.message.delete()
+
     movie_file = open("movie_scripts/" + movie, "r")
 
     script = []
@@ -258,6 +262,8 @@ async def spam_message(ctx, *args):
 
     if(len(spam_message) <= 0):
         await ctx.send("You must provide a message to spam")
+
+    await ctx.message.delete()
 
     if(the_guild):
         if(spam_amount < 0):
