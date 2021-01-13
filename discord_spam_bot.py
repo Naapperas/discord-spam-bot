@@ -25,7 +25,8 @@ emotes = ["kekw", "pepega", "sadge", "peepohappy", "monkaW", "ELIMINAR",
           "pufavo", "pogchamp", "weirdchamp", "homies", "FeelsStrongMan",
           "5head", "bruh", "caragomeu", "ehehe", "mds", "facho", "caos", "zeapogar", 
           "poggies", "angryNPC", "wat", "stop", "cringe", "maskwojak", "monkaHmm", "PepeRage",
-          "spitcereal", "stonks", "stinks", "pepefudido"]
+          "spitcereal", "stonks", "stinks", "pepefudido", "pain", "ban", "mods", "poogers", "thonk",
+          "suicide", "knuckles", "FeelsAmazingMan"]
 
 
 @bot.event
@@ -171,7 +172,7 @@ async def read_movie(ctx, movie_name: str):
     if(len(script) > 0):
         if(the_guild):
             for line in scripts[the_guild]:
-                if(line != ""):
+                if(len(line) > 0):
                     await ctx.send(line)
                     time.sleep(1)
     else:
