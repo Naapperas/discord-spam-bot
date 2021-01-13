@@ -235,8 +235,16 @@ async def speak_movie(ctx, movie_name: str):
 
 
 @bot.command(name="spam_message", help="Spams the given message.")
-async def spam_message(ctx, spam_message: str, spam_amount: int = -1):
+async def spam_message(ctx, *args):
     print("running:spam_message")
+
+    spam_amount = -1
+    try:
+        spam_amount = int(args[-1])
+    except:
+        print("No amount given, default to '-1'")
+
+    spam_message = str(args[:len(args) - 1])
 
     the_guild = ctx.guild
 
@@ -245,7 +253,7 @@ async def spam_message(ctx, spam_message: str, spam_amount: int = -1):
             spamming_messages[the_guild] = True
         else:
             if(spamming_messages[the_guild]):
-                await ctx.send(f"***Already writing movie script {ctx.author.mention}!***")
+                await ctx.send(f"***Already spamming message {ctx.author.mention}!***")
                 return
 
     if(len(spam_message) <= 0):
@@ -258,8 +266,7 @@ async def spam_message(ctx, spam_message: str, spam_amount: int = -1):
         else:
             for _ in range(spam_amount):
                 await ctx.send(spam_message)
-        
-    spamming_messages[the_guild] = True
+            spamming_messages[the_guild] = False
 
 
 @bot.command(name="stop", help="Stops the bot from reading the movie script or spamming emotes, defaults to movies")
