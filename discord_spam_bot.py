@@ -244,7 +244,7 @@ async def spam_message(ctx, *args):
     except:
         print("No amount given, default to '-1'")
 
-    spam_message = str(args[:len(args) - 1])
+    spam_message = " ".join(args[:len(args) - 1])
 
     the_guild = ctx.guild
 
