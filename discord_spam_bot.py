@@ -5,7 +5,6 @@ from pretty_help import PrettyHelp
 #from cogs.spam_bot import spamming_emotes, spamming_messages
 
 TOKEN = str(os.environ['TOKEN'])
-TOKEN = "Nzc1MDkwNjkxNjEyNDc1NDAy.X6hRdQ.pDbpdLj1P6dNUW0rX7ElQNFzj5k"
 
 # 2
 bot = commands.Bot(command_prefix='$', help_command=PrettyHelp())
