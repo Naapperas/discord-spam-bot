@@ -3,18 +3,21 @@ import discord
 import time
 import random
 
-emotes = ["kekw", "pepega", "sadge", "peepohappy", "monkaW", "ELIMINAR",
+class Spam_Bot(commands.Cog):
+    """
+    The name says it all
+    """
+
+    emotes = ["kekw", "pepega", "sadge", "peepohappy", "monkaW", "ELIMINAR",
           "pufavo", "pogchamp", "weirdchamp", "homies", "FeelsStrongMan",
           "5head", "bruh", "caragomeu", "ehehe", "mds", "facho", "caos", "zeapogar", 
           "poggies", "angryNPC", "wat", "stop", "cringe", "maskwojak", "monkaHmm", "PepeRage",
           "spitcereal", "stonks", "stinks", "pepefudido", "pain", "ban", "mods", "poogers", "thonk",
           "suicide", "knuckles", "FeelsAmazingMan"]
 
-spamming_emotes = {}
+    spamming_emotes = {}
 
-spamming_messages = {}
-
-class Spam_Bot(commands.Cog, name="SpamBot"):
+    spamming_messages = {}
 
     the_bot = None
 
@@ -22,7 +25,7 @@ class Spam_Bot(commands.Cog, name="SpamBot"):
         self.the_bot = bot
 
     @commands.has_permissions(administrator=True)
-    @the_bot.command(name="register_emote", hidden=True)
+    @commands.command(name="register_emote", hidden=True)
     async def register_emote(self, ctx, emote_name):
         print("Registering emote")
         await ctx.send("Teste")
@@ -30,19 +33,19 @@ class Spam_Bot(commands.Cog, name="SpamBot"):
         async for message in ctx.channel.history(limit=2):
             await message.delete()
 
-    @the_bot.command(name="fuckyou", help="fuck you")
+    @commands.command(name="fuckyou", help="fuck you")
     async def fuck_you(self, ctx):
         print("running: fuckyou")
         await ctx.send("thats why")
 
 
-    @the_bot.command(name="yomamasofat", help="lol")
+    @commands.command(name="yomamasofat", help="lol")
     async def yomamasofat(self, ctx, member: discord.Member=None):
         print("running: yomamasofat")
         await ctx.send("lol, no u" + ((" " + ctx.message.author.mention) if member else ""))
 
 
-    @the_bot.command(name="poke", help="Be an annoying prick, poke a member >:)")
+    @commands.command(name="poke", help="Be an annoying prick, poke a member >:)")
     async def poke(self, ctx, member: discord.Member):
         print("running: poke")
     
@@ -54,7 +57,7 @@ class Spam_Bot(commands.Cog, name="SpamBot"):
             await the_message.delete()
 
 
-    @the_bot.command(name="spam_message", help="Spams the given message.")
+    @commands.command(name="spam_message", help="Spams the given message.")
     async def spam_message(self, ctx, *args):
         print("running:spam_message")
 
@@ -70,10 +73,10 @@ class Spam_Bot(commands.Cog, name="SpamBot"):
         the_guild = ctx.guild
 
         if(the_guild):
-            if(the_guild not in spamming_messages or not spamming_messages[the_guild]):
-                spamming_messages[the_guild] = True
+            if(the_guild not in self.spamming_messages or not self.spamming_messages[the_guild]):
+                self.spamming_messages[the_guild] = True
             else:
-                if(spamming_messages[the_guild]):
+                if(self.pamming_messages[the_guild]):
                     await ctx.send(f"***Already spamming message {ctx.author.mention}!***")
                     return
 
@@ -84,15 +87,15 @@ class Spam_Bot(commands.Cog, name="SpamBot"):
 
         if(the_guild):
             if(spam_amount < 0):
-                while spamming_messages[the_guild]:
+                while self.spamming_messages[the_guild]:
                     await ctx.send(spam_message)
             else:
                 for _ in range(spam_amount):
                     await ctx.send(spam_message)
-                spamming_messages[the_guild] = False
+                self.spamming_messages[the_guild] = False
 
 
-    @the_bot.command(name="spam_emote", help="Spams emotes continuously (or a specified number of times) or one particular emote specified by the user")
+    @commands.command(name="spam_emote", help="Spams emotes continuously (or a specified number of times) or one particular emote specified by the user")
     async def spam_emote(self, ctx, emote_name: str = "no emote", num_times: int = -1):
         print("running: spam_emote")
         the_message: discord.Message = ctx.message
@@ -103,18 +106,18 @@ class Spam_Bot(commands.Cog, name="SpamBot"):
         the_guild = ctx.guild
 
         if(the_guild):
-            if(the_guild not in spamming_emotes or not spamming_emotes[the_guild]):
-                spamming_emotes[the_guild] = True
+            if(the_guild not in self.spamming_emotes or not self.spamming_emotes[the_guild]):
+                self.spamming_emotes[the_guild] = True
             else:
-                if(spamming_emotes[the_guild]):
+                if(self.spamming_emotes[the_guild]):
                     await ctx.send(f"***Already spamming emotes {ctx.author.mention}!***")
                     return
 
         if(num_times <= -1):
-            while spamming_emotes[the_guild]:
+            while self.spamming_emotes[the_guild]:
                 emote = emote_name
                 if(emote_name == "no emote"):
-                    emote = random.choice(emotes)
+                    emote = random.choice(self.emotes)
                 else:
                     pass
 
@@ -124,15 +127,34 @@ class Spam_Bot(commands.Cog, name="SpamBot"):
             for _ in range(num_times):
                 emote = emote_name
                 if(emote_name == "no emote"):
-                    emote = random.choice(emotes)
+                    emote = random.choice(self.emotes)
                 else:
                     pass
 
                 emoji = discord.utils.get(self.the_bot.emojis, name=emote)
                 await ctx.send(str(emoji) if emoji is not None else f"No emote with name {emote} found")
-            spamming_emotes[the_guild] = False
+            self.spamming_emotes[the_guild] = False
 
 
+    async def stop(self, ctx, the_guild, spam_type):
+        if(spam_type == "emote"):
+            if(the_guild not in self.spamming_emotes or not self.spamming_emotes[the_guild]):
+                await ctx.send("What are you trying to stop, you dumbf*uck?")
+            else:
+                if(self.spamming_emotes[the_guild]):
+                    await ctx.send("Stoping emote spam playback")
+                    self.spamming_emotes[the_guild] = False
+        elif(spam_type == "spam"):
+            if(the_guild not in self.spamming_messages or not self.spamming_messages[the_guild]):
+                await ctx.send("What are you trying to stop, you dumbf*uck?")
+            else:
+                if(self.spamming_messages[the_guild]):
+                    await ctx.send("Stoping message spam")
+                    self.spamming_messages[the_guild] = False
+
+
+def setup(bot):
+    bot.add_cog(Spam_Bot(bot))
 
 
                 

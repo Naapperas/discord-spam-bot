@@ -2,15 +2,15 @@ from discord.ext import commands
 import discord
 import os
 from pretty_help import PrettyHelp
-from cogs.home_cinema import scripts, scripts_running
-from cogs.spam_bot import spamming_emotes, spamming_messages
+#from cogs.spam_bot import spamming_emotes, spamming_messages
 
 TOKEN = str(os.environ['TOKEN'])
+TOKEN = "Nzc1MDkwNjkxNjEyNDc1NDAy.X6hRdQ.pDbpdLj1P6dNUW0rX7ElQNFzj5k"
 
 # 2
 bot = commands.Bot(command_prefix='$', help_command=PrettyHelp())
 
-extensions = ["HomeCinema", "SpamBot"]
+extensions = ["home_cinema", "spam_bot"]
 
 @bot.event
 async def on_ready():
@@ -44,29 +44,19 @@ async def stop(ctx, spam_type="movie"):
     the_guild = ctx.guild
 
     if(the_guild):
+        spam_cog = bot.get_cog("Spam_Bot")
+        cinema_cog = bot.get_cog("Home_Cinema")
+
         if(spam_type == "movie"):
-            if(the_guild not in scripts_running or not scripts_running[the_guild]):
-                await ctx.send("What are you trying to stop, you dumbf*uck?")
-            else:
-                if(scripts_running[the_guild]):
-                    scripts[the_guild].clear()
-                    await ctx.send("Stoping movie script playback")
-                    scripts_running[the_guild] = False
-                    del scripts[the_guild]
-        elif(spam_type == "emote"):
-            if(the_guild not in spamming_emotes or not spamming_emotes[the_guild]):
-                await ctx.send("What are you trying to stop, you dumbf*uck?")
-            else:
-                if(spamming_emotes[the_guild]):
-                    await ctx.send("Stoping emote spam playback")
-                    spamming_emotes[the_guild] = False
-        elif(spam_type == "spam"):
-            if(the_guild not in spamming_messages or not spamming_messages[the_guild]):
-                await ctx.send("What are you trying to stop, you dumbf*uck?")
-            else:
-                if(spamming_messages[the_guild]):
-                    await ctx.send("Stoping message spam")
-                    spamming_messages[the_guild] = False
+            if not cinema_cog:
+                await ctx.send("ERROR")
+                return
+            await cinema_cog.stop(ctx, the_guild)
+        elif(spam_type in {"emote", "spam"}):
+            if not spam_cog:
+                await ctx.send("ERROR")
+                return
+            await spam_cog.stop(ctx, the_guild, spam_type)
 
 
 @bot.event
