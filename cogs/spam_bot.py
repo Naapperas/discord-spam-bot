@@ -2,14 +2,14 @@ from discord.ext import commands
 import discord
 import time
 import random
-# import os
-# import psycopg2
+import os
+import psycopg2
 
-# DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE_URL = os.environ['DATABASE_URL']
 
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
-# print(conn)
+print(conn)
 
 class Spam_Bot(commands.Cog):
     """
