@@ -2,6 +2,7 @@ from discord.ext import commands
 import discord
 import time
 import random
+import os
 
 class Spam_Bot(commands.Cog):
     """
@@ -29,9 +30,17 @@ class Spam_Bot(commands.Cog):
     async def register_emote(self, ctx, emote_name):
         print("Registering emote")
         await ctx.send("Teste")
-        time.sleep(3)
+        time.sleep(1)
         async for message in ctx.channel.history(limit=2):
             await message.delete()
+
+        import psycopg2
+
+        DATABASE_URL = os.environ['DATABASE_URL']
+
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+        print(conn)
 
     @commands.command(name="fuckyou", help="fuck you")
     async def fuck_you(self, ctx):

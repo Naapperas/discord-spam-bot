@@ -66,8 +66,10 @@ async def on_command_error(ctx, error):
     #elif isinstance(error, commands.errors.CommandNotFound):
         #await ctx.send("You do not have permissions to use that command: try asking a server mod/admin")
 
-if __name__ == "__main__":
+if __name__ != "__main__":
     for extension in extensions:
         bot.load_extension("cogs." + extension)
 
     bot.run(TOKEN)
+
+
