@@ -52,7 +52,7 @@ class Spam_Bot(commands.Cog):
             # Fetch result
             record = cursor.fetchone()
             print("You are connected to - ", record, "\n")
-            cursor.execute("SELECT * from *;")
+            cursor.execute("SELECT * from *")
             # Fetch result
             record = cursor.fetchone()
             print("You are connected to - ", record, "\n")
