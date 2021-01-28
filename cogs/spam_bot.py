@@ -41,6 +41,16 @@ class Spam_Bot(commands.Cog):
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
         print(conn)
+        
+        cursor = conn.cursor()
+        # Print PostgreSQL details
+        print("PostgreSQL server information")
+        print(conn.get_dsn_parameters(), "\n")
+        # Executing a SQL query
+        cursor.execute("SELECT version();")
+        # Fetch result
+        record = cursor.fetchone()
+        print("You are connected to - ", record, "\n")
 
     @commands.command(name="fuckyou", help="fuck you")
     async def fuck_you(self, ctx):
