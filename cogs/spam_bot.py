@@ -3,6 +3,8 @@ import discord
 import time
 import random
 import os
+import psycopg2
+from psycopg2 import Error
 
 class Spam_Bot(commands.Cog):
     """
@@ -34,23 +36,34 @@ class Spam_Bot(commands.Cog):
         async for message in ctx.channel.history(limit=2):
             await message.delete()
 
-        import psycopg2
-
         DATABASE_URL = os.environ['DATABASE_URL']
 
-        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+        try:
+            conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
-        print(conn)
-        
-        cursor = conn.cursor()
-        # Print PostgreSQL details
-        print("PostgreSQL server information")
-        print(conn.get_dsn_parameters(), "\n")
-        # Executing a SQL query
-        cursor.execute("SELECT version();")
-        # Fetch result
-        record = cursor.fetchone()
-        print("You are connected to - ", record, "\n")
+            print(conn)
+            
+            cursor = conn.cursor()
+            # Print PostgreSQL details
+            print("PostgreSQL server information")
+            print(conn.get_dsn_parameters(), "\n")
+            # Executing a SQL query
+            cursor.execute("SELECT version();")
+            # Fetch result
+            record = cursor.fetchone()
+            print("You are connected to - ", record, "\n")
+            cursor.execute("SELECT * from *;")
+            # Fetch result
+            record = cursor.fetchone()
+            print("You are connected to - ", record, "\n")
+        except (Exception, Error) as error:
+            print(error)
+        finally:
+            if conn:
+                cursor.close()
+                conn.close()
+                print("PostegreSQL connections closed!")
+
 
     @commands.command(name="fuckyou", help="fuck you")
     async def fuck_you(self, ctx):
