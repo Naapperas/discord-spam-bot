@@ -52,10 +52,8 @@ class Spam_Bot(commands.Cog):
             # Fetch result
             record = cursor.fetchone()
             print("You are connected to - ", record, "\n")
-            cursor.execute("SELECT * from dbuq5ujh9ioodh")
-            # Fetch result
-            record = cursor.fetchone()
-            print("Current database - ", record, "\n")
+            print(DATABASE_URL)
+            
         except (Exception, Error) as error:
             print(error)
         finally:

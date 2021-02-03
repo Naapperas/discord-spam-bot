@@ -13,7 +13,6 @@ extensions = ["home_cinema", "spam_bot"]
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
-    print(f"The guild has {len(bot.emojis)} custom emotes, and they are {list(map(lambda x: x.name, bot.emojis))}")
 
 @bot.command(name="clear", help="clears the last 'n' messages, defaulting to 100", hidden=True)
 async def clear(ctx, the_limit=100):
