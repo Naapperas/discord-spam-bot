@@ -27,7 +27,7 @@ class Home_Cinema(commands.Cog):
         the_guild = ctx.guild
 
         if(the_guild): # check if guild has been passed in the context
-            if(the_guild not in self.scripts_running or not self.cripts_running[the_guild]): # if we are not 'registeres' for potential playback of scripts or aren't playing anything, mark us as so 
+            if(the_guild not in self.scripts_running or not self.scripts_running[the_guild]): # if we are not 'registeres' for potential playback of scripts or aren't playing anything, mark us as so 
                 self.scripts_running[the_guild] = True
             else:
                 if(self.scripts_running[the_guild]): # already 'registered', check if we are playing anything 
