@@ -56,6 +56,9 @@ async def stop(ctx, spam_type="movie"):
                 return
             await spam_cog.stop(ctx, the_guild, spam_type)
 
+@bot.comman(name="ping")
+async def ping(ctx):
+    await ctx.send('pong xd: {0}s'.format(round(bot.latency, 1)))
 
 @bot.event
 async def on_command_error(ctx, error):
