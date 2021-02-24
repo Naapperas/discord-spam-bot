@@ -70,8 +70,11 @@ async def on_command_error(ctx, error):
 
 @bot.command(name="bruh", hidden=True)
 async def bruh(ctx):
-    for member in bot.get_all_members():
-        print(member, type(member))
+    guild: discord.Guild = ctx.guild
+
+    test = await guild.fetch_members()
+
+    print([t for t in test])
 
 if __name__ == "__main__":
     for extension in extensions:
