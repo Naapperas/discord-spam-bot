@@ -75,10 +75,8 @@ async def on_command_error(ctx, error):
 async def bruh(ctx):
     guild: discord.Guild = ctx.guild
 
-    test = await guild.fetch_members()
-
-    print([t for t in test])
-
+    print(guild.members)
+    
 if __name__ == "__main__":
     for extension in extensions:
         bot.load_extension("cogs." + extension)
