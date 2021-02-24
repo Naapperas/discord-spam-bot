@@ -71,7 +71,7 @@ async def on_command_error(ctx, error):
 @bot.command(name="bruh", hidden=True)
 async def bruh(ctx):
     for member in bot.get_all_members():
-        print(member)
+        print(member, type(member))
 
 if __name__ == "__main__":
     for extension in extensions:
