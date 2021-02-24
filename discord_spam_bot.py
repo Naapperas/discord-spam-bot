@@ -5,8 +5,11 @@ from pretty_help import PrettyHelp
 
 TOKEN = str(os.environ['TOKEN'])
 
+intents = discord.Intents.default()
+intents.members = True
+
 # 2
-bot = commands.Bot(command_prefix='$', help_command=PrettyHelp())
+bot = commands.Bot(command_prefix='$', help_command=PrettyHelp(), intents=intents)
 
 extensions = ["home_cinema", "spam_bot"]
 
