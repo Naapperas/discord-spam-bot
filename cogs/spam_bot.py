@@ -106,7 +106,7 @@ class Spam_Bot(commands.Cog):
             if(the_guild not in self.spamming_messages or not self.spamming_messages[the_guild]):
                 self.spamming_messages[the_guild] = True
             else:
-                if(self.pamming_messages[the_guild]):
+                if(self.spamming_messages[the_guild]):
                     await ctx.send(f"***Already spamming message {ctx.author.mention}!***")
                     return
 
